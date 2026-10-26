@@ -3,10 +3,7 @@
    Runtime polymorphism, Classes and objects, Constructors, Encapsulation */
 
 #include <iostream>
-#include <iomanip>
 #include <cmath>
-#include <cstdlib>
-#include <limits>
 using namespace std;
 
 const double PI = 3.14159265;
@@ -20,7 +17,8 @@ public:
 
     void display()
     {
-        cout << fixed << setprecision(2);
+        cout.setf(ios::fixed);
+        cout.precision(2);
         cout << "Shape     : " << getName() << endl;
         cout << "Area      : " << area() << endl;
         cout << "Perimeter : " << perimeter() << endl;
@@ -73,14 +71,12 @@ double readPositive(const char *msg)
     while (1) {
         cout << msg;
         if (cin >> v && v > 0) {
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore(1000, '\n');
             return v;
         }
-        if (cin.eof())
-            exit(0);
         cout << "Invalid input. Enter a number greater than 0.\n";
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(1000, '\n');
     }
 }
 
@@ -131,12 +127,10 @@ int main()
         cout << "0. Exit\n";
         cout << "Enter choice: ";
         if (!(cin >> choice)) {
-            if (cin.eof())
-                break;
             cin.clear();
             choice = -1;
         }
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(1000, '\n');
 
         switch (choice) {
         case 1:
